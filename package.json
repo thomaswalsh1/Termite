@@ -1,0 +1,18 @@
+{
+  "name": "Termite",
+  "private": "true",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "dev": "pnpm -r run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.33.0"
+}
