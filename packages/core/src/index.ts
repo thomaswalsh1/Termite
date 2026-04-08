@@ -1,6 +1,13 @@
 /**
  * These are the exports needed to send core packages
- * to the react package
+ * to the react package. These types and functions go from their
+ * files to here, and then to the react component
  */
-export * from "./state/TerminalEngine";
-export * from "./types";
+export { clearHistory, createTerminal, execute, setInput } from "./functions";
+
+export type {
+  TerminalEntry,
+  TerminalState,
+  TerminalHandler,
+  CreateTerminalOptions,
+} from "./types";
