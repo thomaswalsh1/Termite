@@ -3,10 +3,11 @@
     "jsx": "react-jsx",
     "target": "ESNext",
     "module": "ESNext",
+    "moduleResolution": "Bundler",
     "declaration": true,
     "outDir": "dist",
     "strict": true,
-    "moduleResolution": "node"
+    "skipLibCheck": true
   },
   "include": ["src"]
 }

@@ -1,18 +1,15 @@
 {
-  "name": "Termite",
-  "private": "true",
-  "workspaces": [
-    "packages/*",
-    "examples/*"
-  ],
-  "version": "1.0.0",
-  "description": "",
+  "name": "termite",
+  "private": true,
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "build": "pnpm -r run build",
-    "dev": "pnpm -r run dev"
+    "dev": "turbo dev",
+    "build": "turbo build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.33.0"
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.0"
+  }
 }
