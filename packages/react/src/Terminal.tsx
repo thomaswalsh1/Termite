@@ -8,12 +8,21 @@ interface TerminalProps {
   className?: string;
 }
 
+/**
+ * 
+ * @param param0 the state, submit functions, and classes
+ * @returns 
+ */
 export const Terminal: React.FC<TerminalProps> = ({
   state,
   onInput,
   onSubmit,
   className,
 }: TerminalProps) => {
+  /**
+   * handles the submission
+   * @param e 
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit();
