@@ -4,11 +4,10 @@
  * The user can choose to assign ids and timestamps
  */
 export type TerminalEntry<
-  TOutput = unknown,
   TStatus extends string = "success" | "error" | "info" | "warning",
 > = {
   command: string;
-  output: TOutput;
+  output: string;
   id?: string;
   timestamp?: number;
   status?: TStatus;
@@ -19,21 +18,20 @@ export type TerminalEntry<
  * and optional id and name for organization
  */
 export type TerminalState<
-  TOutput = unknown,
   TStatus extends string = "success" | "error" | "info" | "warning",
 > = {
   id?: string;
   name?: string;
-  history: TerminalEntry<TOutput, TStatus>[];
+  history: TerminalEntry<TStatus>[];
   current: string;
 };
 
 /**
  * Every terminal has a user defined handler
  */
-export type TerminalHandler<TOutput = unknown> = (
+export type TerminalHandler = (
   command: string,
-) => Promise<TOutput> | TOutput;
+) => Promise<string>;
 
 /**
  * Every terminal has options that the user can give it.

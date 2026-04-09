@@ -1,28 +1,38 @@
-import React, { useState } from "react";
-import { TerminalEngine } from "termite-core";
+import React from "react";
+import { TerminalEntry, TerminalState } from "termite-core";
 
 interface TerminalProps {
-  terminal: TerminalEngine;
-  theme?: string;
+  state: TerminalState;
+  onInput: (value: string) => void;
+  onSubmit: () => void;
+  className?: string;
 }
 
-export const Terminal: React.FC<TerminalProps> = ({ terminal, theme }: TerminalProps) => {
-  const [input, setInput] = useState("");
-
+export const Terminal: React.FC<TerminalProps> = ({
+  state,
+  onInput,
+  onSubmit,
+  className,
+}: TerminalProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    terminal.submitCommand(input);
-    setInput("");
+    onSubmit();
   };
 
   return (
-    <div className={`terminal ${theme}`}>
-      {terminal.state.buffer.map((line, i) => (
-        <div key={i}>{line}</div>
+    <div className={className}>
+      {state.history.map((item: TerminalEntry) => (
+        <div key={item.id}>
+          <p>{item.command}</p>
+          <p>{item.output}</p>
+        </div>
       ))}
       <form onSubmit={handleSubmit}>
-        <span>$</span>
-        <input value={input} onChange={(e) => setInput(e.target.value)} />
+        <input
+          value={state.current}
+          onChange={(e) => onInput(e.target.value)}
+          autoFocus
+        />
       </form>
     </div>
   );

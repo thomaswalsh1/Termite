@@ -8,13 +8,14 @@
     "build": "vite build"
   },
   "dependencies": {
-    "termite-react": "workspace:*",
+    "@types/node": "^25.5.2",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "termite-react": "workspace:*"
   },
   "devDependencies": {
-    "vite": "^5.2.0",
     "@vitejs/plugin-react": "^4.2.0",
-    "typescript": "^5.4.0"
+    "typescript": "^5.4.0",
+    "vite": "^5.2.0"
   }
 }

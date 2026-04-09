@@ -1,3 +1,127 @@
+main {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 48px 24px;
+  box-sizing: border-box;
+}
+
+.demo-header {
+  margin-bottom: 40px;
+}
+
+.demo-header h1 {
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+  margin: 0 0 8px;
+  color: var(--text-h);
+}
+
+.demo-subtitle {
+  color: var(--text);
+  font-size: 16px;
+}
+
+.terminal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.terminal-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--code-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+
+  &.red    { background: #ff5f57; }
+  &.yellow { background: #febc2e; }
+  &.green  { background: #28c840; }
+}
+
+.terminal-card-title {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+  margin-left: 6px;
+}
+
+.terminal {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--text-h);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 220px;
+}
+
+.terminal div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.terminal p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.terminal p:first-child::before {
+  content: '$ ';
+  color: var(--accent);
+}
+
+.terminal form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.terminal form::before {
+  content: '$';
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 14px;
+}
+
+.terminal input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-h);
+  font-family: var(--mono);
+  font-size: 14px;
+  caret-color: var(--accent);
+}
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;

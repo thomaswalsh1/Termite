@@ -1,2 +1,2 @@
-export * from "./Terminal";
-export * from "./hooks/useTerminal";
+export { Terminal } from "./Terminal";
+export { useTerminal } from "./hooks/useTerminal";
