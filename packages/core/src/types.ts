@@ -8,6 +8,7 @@ export type TerminalEntry<
 > = {
   command: string;
   output: string;
+  cwd?: string;
   id?: string;
   timestamp?: number;
   status?: TStatus;
@@ -24,6 +25,8 @@ export type TerminalState<
   name?: string;
   history: TerminalEntry<TStatus>[];
   current: string;
+  cwd?: string;
+  prompt?: string;
 };
 
 /**
@@ -39,4 +42,6 @@ export type TerminalHandler = (
 export type CreateTerminalOptions = {
   id?: string;
   name?: string;
+  cwd?: string;
+  prompt?: string;
 };

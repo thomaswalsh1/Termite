@@ -1,19 +1,20 @@
 import { useState, useCallback } from "react";
-import { createTerminal, setInput, execute, clearHistory } from "termite-core";
-import type { TerminalHandler, TerminalState } from "termite-core";
+import { createTerminal, setInput, execute, clearHistory, setCwd } from "termite-core";
+import type { TerminalHandler, TerminalState, CreateTerminalOptions } from "termite-core";
 
 /**
  * useTerminal is the root of this thing. It gives you
  * the context you need.
  * @param handler the command that maps commands to outputs
+ * @param options optional initial terminal options (cwd, prompt, id, name)
  * @returns an object with state
  */
-export function useTerminal(handler: TerminalHandler) {
+export function useTerminal(handler: TerminalHandler, options?: CreateTerminalOptions) {
   /**
    * createTerminal is passed as an initializer function
    * runs once on mount
    */
-  const [state, setState] = useState<TerminalState>(() => createTerminal());
+  const [state, setState] = useState<TerminalState>(() => createTerminal(options));
 
   /**
    * will be called on every keystroke.

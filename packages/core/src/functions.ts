@@ -15,8 +15,23 @@ export function createTerminal(
   return {
     id: options.id,
     name: options.name,
+    cwd: options.cwd,
+    prompt: options.prompt,
     history: [],
     current: "",
+  };
+}
+
+/**
+ *
+ * @param state the current terminal state
+ * @param cwd the new working directory
+ * @returns updated terminal state with new cwd
+ */
+export function setCwd(state: TerminalState, cwd: string): TerminalState {
+  return {
+    ...state,
+    cwd,
   };
 }
 
@@ -69,6 +84,7 @@ export async function execute(
       {
         command,
         output,
+        cwd: state.cwd,
         id: crypto.randomUUID(),
         timestamp: Date.now(),
       },

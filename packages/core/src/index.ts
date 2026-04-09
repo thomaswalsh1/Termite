@@ -3,7 +3,7 @@
  * to the react package. These types and functions go from their
  * files to here, and then to the react component
  */
-export { clearHistory, createTerminal, execute, setInput } from "./functions";
+export { clearHistory, createTerminal, execute, setInput, setCwd } from "./functions";
 
 export type {
   TerminalEntry,
