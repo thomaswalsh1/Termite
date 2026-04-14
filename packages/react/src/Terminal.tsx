@@ -1,5 +1,6 @@
 import React from "react";
 import { TerminalEntry, TerminalState } from "termite-core";
+import { injectStyles } from "./styles";
 
 export interface TerminalClassNames {
   root?: string;
@@ -37,6 +38,8 @@ export const Terminal: React.FC<TerminalProps> = ({
   className,
   classNames = {},
 }: TerminalProps) => {
+  injectStyles();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit();
@@ -49,10 +52,10 @@ export const Terminal: React.FC<TerminalProps> = ({
           <div key={item.id} className={cx("termite-entry", classNames.entry)}>
             <p className={cx("termite-command", classNames.command)}>
               {item.cwd && (
-                <span className={cx("termite-cwd", classNames.cwd)}>{item.cwd} </span>
+                <span className={cx("termite-cwd", classNames.cwd)}>{item.cwd}</span>
               )}
               {state.prompt && (
-                <span className={cx("termite-prompt", classNames.prompt)}>{state.prompt} </span>
+                <span className={cx("termite-prompt", classNames.prompt)}>{state.prompt}</span>
               )}
               {item.command}
             </p>
@@ -62,10 +65,10 @@ export const Terminal: React.FC<TerminalProps> = ({
       </div>
       <form className={cx("termite-form", classNames.form)} onSubmit={handleSubmit}>
         {state.cwd && (
-          <span className={cx("termite-cwd", classNames.cwd)}>{state.cwd} </span>
+          <span className={cx("termite-cwd", classNames.cwd)}>{state.cwd}</span>
         )}
         {state.prompt && (
-          <span className={cx("termite-prompt", classNames.prompt)}>{state.prompt} </span>
+          <span className={cx("termite-prompt", classNames.prompt)}>{state.prompt}</span>
         )}
         <input
           className={cx("termite-input", classNames.input)}
