@@ -9,6 +9,7 @@
 }
 
 .overall {
+  height: 200px;
 }
 
 .terminal-input {
@@ -20,13 +21,13 @@
 }
 
 .terminal-2 {
-  border: 1px solid red;
   width: 100%;
+  height: 200px;
 }
 
 .terminal-3 {
-  border: 1px solid red;
   width: 100%;
+  height: 200px;
 }
 
 .terminal-4 {
@@ -38,7 +39,6 @@
 }
 
 #expanding-system {
-
 }
 
 #row-1 {

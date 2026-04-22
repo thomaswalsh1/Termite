@@ -42,15 +42,51 @@ const css = `
   gap:         1ch;
 }
 
+.termite-input-wrapper {
+  flex:     1;
+  position: relative;
+  display:  flex;
+  align-items: center;
+}
+
+.termite-input-display {
+  position:       absolute;
+  inset:          0;
+  display:        flex;
+  align-items:    center;
+  pointer-events: none;
+  font-family:    var(--termite-font);
+  font-size:      var(--termite-font-size);
+  line-height:    1.6;
+  white-space:    pre;
+}
+
+.termite-cursor {
+  background: var(--termite-text);
+  color:      var(--termite-bg);
+  animation:  termite-blink 1s step-end infinite;
+}
+
+@keyframes termite-blink {
+  50% { opacity: 0; }
+}
+
 .termite-input {
-  flex:        1;
-  background:  none;
-  border:      none;
-  outline:     none;
-  color:       var(--termite-text);
-  font-family: var(--termite-font);
-  font-size:   var(--termite-font-size);
-  line-height: 1.6;
+  flex:         1;
+  width:        100%;
+  background:   none;
+  border:       none;
+  outline:      none;
+  color:        transparent;
+  caret-color:  transparent;
+  font-family:  var(--termite-font);
+  font-size:    var(--termite-font-size);
+  line-height:  1.6;
+  padding:      0;
+}
+
+.termite-input::selection {
+  background: transparent;
 }
 `;
 

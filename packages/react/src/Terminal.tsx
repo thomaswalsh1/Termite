@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TerminalEntry, TerminalState } from "termite-core";
 import { injectStyles } from "./styles";
 
@@ -40,6 +40,19 @@ export const Terminal: React.FC<TerminalProps> = ({
 }: TerminalProps) => {
   injectStyles();
 
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [cursorPos, setCursorPos] = useState(0);
+
+  useEffect(() => {
+    setCursorPos(state.current.length);
+  }, [state.current]);
+
+  const updateCursor = () => {
+    if (inputRef.current) {
+      setCursorPos(inputRef.current.selectionStart ?? state.current.length);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit();
@@ -70,12 +83,22 @@ export const Terminal: React.FC<TerminalProps> = ({
         {state.prompt && (
           <span className={cx("termite-prompt", classNames.prompt)}>{state.prompt}</span>
         )}
-        <input
-          className={cx("termite-input", classNames.input)}
-          value={state.current}
-          onChange={(e) => onInput(e.target.value)}
-          autoFocus
-        />
+        <div className="termite-input-wrapper">
+          <div className="termite-input-display" aria-hidden>
+            <span>{state.current.slice(0, cursorPos)}</span>
+            <span className="termite-cursor">{state.current[cursorPos] ?? " "}</span>
+            <span>{state.current.slice(cursorPos + 1)}</span>
+          </div>
+          <input
+            ref={inputRef}
+            className={cx("termite-input", classNames.input)}
+            value={state.current}
+            onChange={(e) => { onInput(e.target.value); updateCursor(); }}
+            onSelect={updateCursor}
+            onKeyUp={updateCursor}
+            autoFocus
+          />
+        </div>
       </form>
     </div>
   );

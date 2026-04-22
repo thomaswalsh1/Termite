@@ -62,6 +62,7 @@ export default function App() {
           onSubmit={onSubmit}
         />
       </div>
+      <br style={{height: "400px"}}></br>
       <div id="expanding-system">
         <div id="row-1">
           <Terminal
