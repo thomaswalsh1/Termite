@@ -7,25 +7,29 @@ class TerminalObject {
   state: TerminalState;
   onInput: (value: string) => void;
   onSubmit: () => Promise<void>;
+  onClear: () => void;
 }
 
 export default function App() {
   const { state, onInput, onSubmit } = useTerminal(
-    async (cmd) => {
+    async (cmd, { clear }) => {
+      if (cmd === "clear") { clear(); return ""; }
       return `you ran: ${cmd}`;
     },
     { cwd: "/home/thomas", prompt: "$" },
   );
 
   const terminal2: TerminalObject = useTerminal(
-    async (cmd) => {
+    async (cmd, { clear }) => {
+      if (cmd === "clear") { clear(); return ""; }
       return `you ran: ${cmd}`;
     },
     { cwd: "/home/thomas", prompt: "$" },
   );
 
   const terminal3: TerminalObject = useTerminal(
-    async (cmd) => {
+    async (cmd, { clear }) => {
+      if (cmd === "clear") { clear(); return ""; }
       return `you ran: ${cmd}`;
     },
     { cwd: "/home/thomas", prompt: "$" },

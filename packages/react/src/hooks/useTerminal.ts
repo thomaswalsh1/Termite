@@ -1,42 +1,37 @@
 import { useState, useCallback } from "react";
 import { createTerminal, setInput, execute, clearHistory, setCwd } from "termite-core";
-import type { TerminalHandler, TerminalState, CreateTerminalOptions } from "termite-core";
+import type { TerminalState, CreateTerminalOptions } from "termite-core";
 
-/**
- * useTerminal is the root of this thing. It gives you
- * the context you need.
- * @param handler the command that maps commands to outputs
- * @param options optional initial terminal options (cwd, prompt, id, name)
- * @returns an object with state
- */
-export function useTerminal(handler: TerminalHandler, options?: CreateTerminalOptions) {
-  /**
-   * createTerminal is passed as an initializer function
-   * runs once on mount
-   */
+export type TerminalContext = {
+  clear: () => void;
+};
+
+export type UseTerminalHandler = (cmd: string, ctx: TerminalContext) => Promise<string>;
+
+export function useTerminal(handler: UseTerminalHandler, options?: CreateTerminalOptions) {
   const [state, setState] = useState<TerminalState>(() => createTerminal(options));
 
-  /**
-   * will be called on every keystroke.
-   * setInput returns a new state
-   */
   const onInput = useCallback((value: string) => {
     setState((s) => setInput(s, value));
   }, []);
 
-  /**
-   * Sets the state to the output of executing the command
-   */
   const onSubmit = useCallback(async () => {
     setState((s) => {
-      execute(s, handler).then(setState);
+      let clearRequested = false;
+      const ctx: TerminalContext = { clear: () => { clearRequested = true; } };
+
+      execute(s, (cmd) => handler(cmd, ctx)).then((newState) => {
+        if (clearRequested) {
+          setState((current) => ({ ...clearHistory(current), current: "" }));
+        } else {
+          setState(newState);
+        }
+      });
+
       return s;
     });
   }, [handler]);
 
-  /**
-   * sets the state to clearing history
-   */
   const onClear = useCallback(() => {
     setState((s) => clearHistory(s));
   }, []);
