@@ -42,6 +42,7 @@ export const Terminal: React.FC<TerminalProps> = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
   const [cursorPos, setCursorPos] = useState(0);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     setCursorPos(state.current.length);
@@ -86,7 +87,7 @@ export const Terminal: React.FC<TerminalProps> = ({
         <div className="termite-input-wrapper">
           <div className="termite-input-display" aria-hidden>
             <span>{state.current.slice(0, cursorPos)}</span>
-            <span className="termite-cursor">{state.current[cursorPos] ?? " "}</span>
+            <span className={isFocused ? "termite-cursor" : ""}>{state.current[cursorPos] ?? " "}</span>
             <span>{state.current.slice(cursorPos + 1)}</span>
           </div>
           <input
@@ -96,6 +97,8 @@ export const Terminal: React.FC<TerminalProps> = ({
             onChange={(e) => { onInput(e.target.value); updateCursor(); }}
             onSelect={updateCursor}
             onKeyUp={updateCursor}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
             autoFocus
           />
         </div>
