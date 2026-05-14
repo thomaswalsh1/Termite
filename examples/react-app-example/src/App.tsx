@@ -42,6 +42,13 @@ export default function App() {
     { cwd: "/home/thomas", prompt: "$" },
   );
 
+  const terminal5: TerminalObject = useTerminal(
+    async (cmd) => {
+      return `you ran: ${cmd}`;
+    },
+    { cwd: "/home/thomas", prompt: "$" },
+  );
+
   return (
     <div className="main-container" id="main-screen">
       <div className="header-container" id="main-header">
@@ -78,7 +85,21 @@ export default function App() {
             onSubmit={terminal3.onSubmit}
           />
         </div>
-        <div id="row-2"></div>
+        <div className="spacer" />
+        <div id="row-2">
+          <Terminal
+            className="terminal-4"
+            state={terminal4.state}
+            onInput={terminal4.onInput}
+            onSubmit={terminal4.onSubmit}
+          />
+          <Terminal
+            className="terminal-5"
+            state={terminal5.state}
+            onInput={terminal5.onInput}
+            onSubmit={terminal5.onSubmit}
+          />
+        </div>
       </div>
     </div>
   );

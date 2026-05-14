@@ -99,7 +99,6 @@ export const Terminal: React.FC<TerminalProps> = ({
             onKeyUp={updateCursor}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            autoFocus
           />
         </div>
       </form>
