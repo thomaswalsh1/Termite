@@ -41,12 +41,19 @@ export const Terminal: React.FC<TerminalProps> = ({
   injectStyles();
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const [cursorPos, setCursorPos] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     setCursorPos(state.current.length);
   }, [state.current]);
+
+  useEffect(() => {
+    if (rootRef.current) {
+      rootRef.current.scrollTop = rootRef.current.scrollHeight;
+    }
+  }, [state.history]);
 
   const updateCursor = () => {
     if (inputRef.current) {
@@ -60,7 +67,7 @@ export const Terminal: React.FC<TerminalProps> = ({
   };
 
   return (
-    <div className={cx("termite-root", className ?? classNames.root)}>
+    <div ref={rootRef} className={cx("termite-root", className ?? classNames.root)}>
       <div className={cx("termite-history", classNames.history)}>
         {state.history.map((item: TerminalEntry) => (
           <div key={item.id} className={cx("termite-entry", classNames.entry)}>
