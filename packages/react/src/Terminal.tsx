@@ -20,14 +20,9 @@ interface TerminalProps {
   onSubmit: () => void;
   className?: string;
   classNames?: TerminalClassNames;
+  title?: string;
 }
 
-/**
- *
- * @param base base class
- * @param override overriding class
- * @returns a classname
- */
 const cx = (base: string, override?: string) =>
   override ? `${base} ${override}` : base;
 
@@ -37,11 +32,12 @@ export const Terminal: React.FC<TerminalProps> = ({
   onSubmit,
   className,
   classNames = {},
+  title,
 }: TerminalProps) => {
   injectStyles();
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const rootRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
   const [cursorPos, setCursorPos] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -50,8 +46,8 @@ export const Terminal: React.FC<TerminalProps> = ({
   }, [state.current]);
 
   useEffect(() => {
-    if (rootRef.current) {
-      rootRef.current.scrollTop = rootRef.current.scrollHeight;
+    if (bodyRef.current) {
+      bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
     }
   }, [state.history]);
 
@@ -67,48 +63,63 @@ export const Terminal: React.FC<TerminalProps> = ({
   };
 
   return (
-    <div ref={rootRef} className={cx("termite-root", className ?? classNames.root)}>
-      <div className={cx("termite-history", classNames.history)}>
-        {state.history.map((item: TerminalEntry) => (
-          <div key={item.id} className={cx("termite-entry", classNames.entry)}>
-            <p className={cx("termite-command", classNames.command)}>
-              {item.cwd && (
-                <span className={cx("termite-cwd", classNames.cwd)}>{item.cwd}</span>
-              )}
-              {state.prompt && (
-                <span className={cx("termite-prompt", classNames.prompt)}>{state.prompt}</span>
-              )}
-              {item.command}
-            </p>
-            <p className={cx("termite-output", classNames.output)}>{item.output}</p>
+    <div
+      className={cx("termite-root", className ?? classNames.root)}
+      onClick={() => inputRef.current?.focus()}
+    >
+      {title && (
+        <div className="termite-titlebar">
+          <div className="termite-titlebar-dots">
+            <span className="termite-dot termite-dot-red" />
+            <span className="termite-dot termite-dot-yellow" />
+            <span className="termite-dot termite-dot-green" />
           </div>
-        ))}
-      </div>
-      <form className={cx("termite-form", classNames.form)} onSubmit={handleSubmit}>
-        {state.cwd && (
-          <span className={cx("termite-cwd", classNames.cwd)}>{state.cwd}</span>
-        )}
-        {state.prompt && (
-          <span className={cx("termite-prompt", classNames.prompt)}>{state.prompt}</span>
-        )}
-        <div className="termite-input-wrapper">
-          <div className="termite-input-display" aria-hidden>
-            <span>{state.current.slice(0, cursorPos)}</span>
-            <span className={isFocused ? "termite-cursor" : ""}>{state.current[cursorPos] ?? " "}</span>
-            <span>{state.current.slice(cursorPos + 1)}</span>
-          </div>
-          <input
-            ref={inputRef}
-            className={cx("termite-input", classNames.input)}
-            value={state.current}
-            onChange={(e) => { onInput(e.target.value); updateCursor(); }}
-            onSelect={updateCursor}
-            onKeyUp={updateCursor}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-          />
+          <span className="termite-titlebar-title">{title}</span>
         </div>
-      </form>
+      )}
+      <div ref={bodyRef} className="termite-body">
+        <div className={cx("termite-history", classNames.history)}>
+          {state.history.map((item: TerminalEntry) => (
+            <div key={item.id} className={cx("termite-entry", classNames.entry)}>
+              <p className={cx("termite-command", classNames.command)}>
+                {item.cwd && (
+                  <span className={cx("termite-cwd", classNames.cwd)}>{item.cwd}</span>
+                )}
+                {state.prompt && (
+                  <span className={cx("termite-prompt", classNames.prompt)}>{state.prompt}</span>
+                )}
+                {item.command}
+              </p>
+              {item.output && <p className={cx("termite-output", classNames.output)}>{item.output}</p>}
+            </div>
+          ))}
+        </div>
+        <form className={cx("termite-form", classNames.form)} onSubmit={handleSubmit}>
+          {state.cwd && (
+            <span className={cx("termite-cwd", classNames.cwd)}>{state.cwd}</span>
+          )}
+          {state.prompt && (
+            <span className={cx("termite-prompt", classNames.prompt)}>{state.prompt}</span>
+          )}
+          <div className="termite-input-wrapper">
+            <div className="termite-input-display" aria-hidden>
+              <span>{state.current.slice(0, cursorPos)}</span>
+              <span className={isFocused ? "termite-cursor" : ""}>{state.current[cursorPos] ?? " "}</span>
+              <span>{state.current.slice(cursorPos + 1)}</span>
+            </div>
+            <input
+              ref={inputRef}
+              className={cx("termite-input", classNames.input)}
+              value={state.current}
+              onChange={(e) => { onInput(e.target.value); updateCursor(); }}
+              onSelect={updateCursor}
+              onKeyUp={updateCursor}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

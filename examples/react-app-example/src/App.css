@@ -1,64 +1,94 @@
-.main-container {
-  margin: 20px;
+.app {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px;
 }
 
-.terminal-root {
-  overflow: scroll;
-  max-height: 200px;
-  background-color: rgb(141, 141, 196);
+.app-header {
+  margin-bottom: 56px;
+  text-align: center;
 }
 
-.overall {
-  height: 200px;
+.app-header h1 {
+  font-size: 2.5rem;
+  margin: 0 0 8px;
+  color: #1a1a1a;
+  font-family: monospace;
 }
 
-.terminal-input {
-  
+.app-header p {
+  margin: 0;
+  color: #666;
+  font-size: 1rem;
 }
 
-.terminal-command {
-
-}
-
-.terminal-2 {
-  width: 100%;
-  height: 200px;
-}
-
-.terminal-3 {
-  width: 100%;
-  height: 200px;
-}
-
-.spacer {
-  height: 500px;
-}
-
-.terminal-4 {
-  width: 100%;
-  background-color: white;
-  color: black;
-}
-
-.terminal-5 {
-  width: 100%;
-  background-color: red;
-  color: blue;
-}
-
-#expanding-system {
-}
-
-#row-1 {
-  width: 100%;
+.app-main {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-} 
+  flex-direction: column;
+  gap: 48px;
+}
 
-#row-2 {
-  width: 100%;
+.demo-section h2 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #888;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.demo-section h3 {
+  font-size: 0.8rem;
+  color: #999;
+  margin: 0 0 6px;
+}
+
+.terminal-row {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  gap: 16px;
+}
+
+.terminal-col {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Terminal windows ──────────────────────────────── */
+
+.terminal-default {
+  height: 280px;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.termite-root.terminal-light {
+  --termite-bg:         #f8f8f8;
+  --termite-text:       #1a1a1a;
+  --termite-title-bg:   #e4e4e4;
+  --termite-title-text: #666;
+  height: 280px;
+  border-radius: 8px;
+  border: 1px solid #d0d0d0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.termite-root.terminal-hacker {
+  --termite-bg:         #0a0a0a;
+  --termite-text:       #00ff41;
+  --termite-title-bg:   #111;
+  --termite-title-text: #00aa2b;
+  height: 280px;
+  border-radius: 8px;
+  border: 1px solid #1a3a1a;
+  box-shadow: 0 4px 20px rgba(0, 255, 65, 0.1);
+}
+
+.termite-root.terminal-compact {
+  --termite-font-size: 12px;
+  height: 140px;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
