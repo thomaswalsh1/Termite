@@ -20,7 +20,6 @@ interface TerminalProps {
   onSubmit: () => void;
   className?: string;
   classNames?: TerminalClassNames;
-  title?: string;
 }
 
 const cx = (base: string, override?: string) =>
@@ -32,7 +31,6 @@ export const Terminal: React.FC<TerminalProps> = ({
   onSubmit,
   className,
   classNames = {},
-  title,
 }: TerminalProps) => {
   injectStyles();
 
@@ -67,16 +65,6 @@ export const Terminal: React.FC<TerminalProps> = ({
       className={cx("termite-root", className ?? classNames.root)}
       onClick={() => inputRef.current?.focus()}
     >
-      {title && (
-        <div className="termite-titlebar">
-          <div className="termite-titlebar-dots">
-            <span className="termite-dot termite-dot-red" />
-            <span className="termite-dot termite-dot-yellow" />
-            <span className="termite-dot termite-dot-green" />
-          </div>
-          <span className="termite-titlebar-title">{title}</span>
-        </div>
-      )}
       <div ref={bodyRef} className="termite-body">
         <div className={cx("termite-history", classNames.history)}>
           {state.history.map((item: TerminalEntry) => (
