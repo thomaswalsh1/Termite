@@ -85,29 +85,9 @@ export default function App() {
             </div>
             <div className="terminal-col">
               <h3>Hacker</h3>
-              {/* root?: string;
-              history?: string;
-              entry?: string;
-              command?: string;
-              output?: string;
-              form?: string;
-              cwd?: string;
-              prompt?: string;
-              input?: string; */}
               <TermWindow title="root@host" className="hacker">
                 <Terminal
                   className="terminal-hacker"
-                  classNames={{
-                    root: "terminal-hacker-foreground",
-                    history: "terminal-hacker-foreground",
-                    entry: "terminal-hacker-foreground",
-                    command: "terminal-hacker-foreground",
-                    output: "terminal-hacker-foreground",
-                    form: "terminal-hacker-foreground",
-                    cwd: "terminal-hacker-foreground",
-                    prompt: "terminal-hacker-foreground",
-                    input: "terminal-hacker-foreground",
-                  }}
                   state={t3.state}
                   onInput={t3.onInput}
                   onSubmit={t3.onSubmit}

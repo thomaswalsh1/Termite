@@ -1,4 +1,4 @@
-This is a note to help with the development state of Termite.
+This is a note for Tom to help with the development state of Termite.
 
 ## pnpm
 

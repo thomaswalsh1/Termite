@@ -1,15 +1,33 @@
 import { useState, useCallback } from "react";
-import { createTerminal, setInput, execute, clearHistory, setCwd } from "termite-core";
+import {
+  createTerminal,
+  setInput,
+  execute,
+  clearHistory,
+  setCwd,
+} from "termite-core";
 import type { TerminalState, CreateTerminalOptions } from "termite-core";
 
+/* clear is necessary for all terminals. It is the only thing that can delete outputs */
+/*
+Terminal Context contains stuff that needs to be there
+*/
 export type TerminalContext = {
   clear: () => void;
 };
 
-export type UseTerminalHandler = (cmd: string, ctx: TerminalContext) => Promise<string>;
+export type UseTerminalHandler = (
+  cmd: string,
+  ctx: TerminalContext,
+) => Promise<string>;
 
-export function useTerminal(handler: UseTerminalHandler, options?: CreateTerminalOptions) {
-  const [state, setState] = useState<TerminalState>(() => createTerminal(options));
+export function useTerminal(
+  handler: UseTerminalHandler,
+  options?: CreateTerminalOptions,
+) {
+  const [state, setState] = useState<TerminalState>(() =>
+    createTerminal(options),
+  );
 
   const onInput = useCallback((value: string) => {
     setState((s) => setInput(s, value));
@@ -18,7 +36,11 @@ export function useTerminal(handler: UseTerminalHandler, options?: CreateTermina
   const onSubmit = useCallback(async () => {
     setState((s) => {
       let clearRequested = false;
-      const ctx: TerminalContext = { clear: () => { clearRequested = true; } };
+      const ctx: TerminalContext = {
+        clear: () => {
+          clearRequested = true;
+        },
+      };
 
       execute(s, (cmd) => handler(cmd, ctx)).then((newState) => {
         if (clearRequested) {

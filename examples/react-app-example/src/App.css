@@ -147,18 +147,15 @@
 }
 
 .terminal-light {
-  background-color: #f8f8f8;
+  --termite-bg: #f8f8f8;
+  --termite-text: #1a1a1a;
   flex: 1;
 }
 
 .terminal-hacker {
-  background-color: #0a0a0a;
-  color: #00aa2b;
+  --termite-bg: #0a0a0a;
+  --termite-text: #00aa2b;
   flex: 1;
-}
-
-.terminal-hacker-foreground {
-  color: #00aa2b;
 }
 
 .terminal-compact {

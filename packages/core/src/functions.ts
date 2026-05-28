@@ -1,5 +1,6 @@
 import type {
   TerminalState,
+  TerminalEntry,
   TerminalHandler,
   CreateTerminalOptions,
 } from "./types";
@@ -66,6 +67,26 @@ export function clearHistory(state: TerminalState): TerminalState {
  * @param handler the callback function for mapping input to output
  * @returns a promise for a new terminal state depending on output
  */
+export function addLog(
+  state: TerminalState,
+  message: string,
+  status?: TerminalEntry["status"],
+): TerminalState {
+  return {
+    ...state,
+    history: [
+      ...state.history,
+      {
+        command: "",
+        output: message,
+        id: crypto.randomUUID(),
+        timestamp: Date.now(),
+        status,
+      },
+    ],
+  };
+}
+
 export async function execute(
   state: TerminalState,
   handler: TerminalHandler,
