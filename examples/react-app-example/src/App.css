@@ -157,14 +157,57 @@
   flex: 1;
 }
 
+.terminal-hacker-foreground {
+  color: #00aa2b;
+}
+
 .terminal-compact {
   font-size: 12px;
   flex: 1;
 }
 
-/* --- Custom development terminals ---- */
+/* --- Custom terminals & windows (used in development of this plugin ---- */
 
+/* --- Custom terminal 1 --- */
 .custom-terminal-1 {
   height: 400px;
-  color: red;
+}
+
+.custom-terminal-1-container {
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: red;
+}
+
+.custom-terminal-1-header {
+  height: 25px;
+  display: flex;
+  align-items: center;
+  background-color: grey;
+  position: relative;
+
+  text-align: center;
+  font-size: 12px;
+  color: #000000;
+  font-family: monospace;
+}
+
+.custom-terminal-1-header span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+.custom-terminal-1-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding-right: 8px;
+  z-index: 1;
 }

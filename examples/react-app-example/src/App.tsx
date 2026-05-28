@@ -1,20 +1,28 @@
 import React from "react";
 import { Terminal, useTerminal } from "termite-react";
+import { FaRegWindowMinimize } from "react-icons/fa";
+import { FaRegWindowClose } from "react-icons/fa";
+import { FaRegWindowMaximize } from "react-icons/fa";
+
 import "./App.css";
 
 function useEchoTerminal(options: { cwd?: string; prompt?: string }) {
-  return useTerminal(
-    async (cmd, { clear }) => {
-      if (cmd === "clear") { clear(); return ""; }
-      if (cmd === "help") return "commands: help, clear, echo <text>";
-      if (cmd.startsWith("echo ")) return cmd.slice(5);
-      return `${cmd}: command not found`;
-    },
-    options,
-  );
+  return useTerminal(async (cmd, { clear }) => {
+    if (cmd === "clear") {
+      clear();
+      return "";
+    }
+    if (cmd === "help") return "commands: help, clear, echo <text>";
+    if (cmd.startsWith("echo ")) return cmd.slice(5);
+    return `${cmd}: command not found`;
+  }, options);
 }
 
-function TermWindow({ title, children, className }: {
+function TermWindow({
+  title,
+  children,
+  className,
+}: {
   title: string;
   children: React.ReactNode;
   className?: string;
@@ -77,9 +85,29 @@ export default function App() {
             </div>
             <div className="terminal-col">
               <h3>Hacker</h3>
+              {/* root?: string;
+              history?: string;
+              entry?: string;
+              command?: string;
+              output?: string;
+              form?: string;
+              cwd?: string;
+              prompt?: string;
+              input?: string; */}
               <TermWindow title="root@host" className="hacker">
                 <Terminal
                   className="terminal-hacker"
+                  classNames={{
+                    root: "terminal-hacker-foreground",
+                    history: "terminal-hacker-foreground",
+                    entry: "terminal-hacker-foreground",
+                    command: "terminal-hacker-foreground",
+                    output: "terminal-hacker-foreground",
+                    form: "terminal-hacker-foreground",
+                    cwd: "terminal-hacker-foreground",
+                    prompt: "terminal-hacker-foreground",
+                    input: "terminal-hacker-foreground",
+                  }}
                   state={t3.state}
                   onInput={t3.onInput}
                   onSubmit={t3.onSubmit}
@@ -102,13 +130,23 @@ export default function App() {
         </section>
 
         <section className="demo-section">
-          <h2>Customize your own windows</h2>
+          <h2>Customize your own terminals and windows</h2>
+          <div className="custom-terminal-1-container">
+            <div className="custom-terminal-1-header">
+              <span>Customize your terminals</span>
+              <div className="custom-terminal-1-controls">
+                <FaRegWindowMinimize className="custom-terminal-1-icon" />
+                <FaRegWindowMaximize className="custom-terminal-1-icon" />
+                <FaRegWindowClose className="custom-terminal-1-icon" />
+              </div>
+            </div>
             <Terminal
               className="custom-terminal-1"
               state={t5.state}
               onInput={t5.onInput}
               onSubmit={t5.onSubmit}
             />
+          </div>
         </section>
       </main>
     </div>
