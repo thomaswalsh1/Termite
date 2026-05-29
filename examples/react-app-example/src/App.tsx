@@ -49,7 +49,7 @@ export default function App() {
   const t4 = useEchoTerminal({ prompt: ">" });
   const t5 = useEchoTerminal({ cwd: "~/projects", prompt: "❯" });
 
-  const t6 = useLogger({ cwd: "Output@Termite.ui:" });
+  const t6 = useLogger({ cwd: "Output@Termite.ui" });
 
   return (
     <div className="app">
@@ -135,7 +135,7 @@ export default function App() {
           <div className="custom-terminal-2-buttons">
             <button
               onClick={() => {
-                t6.log("Hi!", "info");
+                t6.log("Hi!", "success");
               }}
             >
               Say Hi

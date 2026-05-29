@@ -9,6 +9,9 @@ export function useLogger(options?: CreateTerminalOptions) {
 
   const log = useCallback(
     (message: string, status?: TerminalEntry["status"]) => {
+      if (options?.cwd) {
+        message = options.cwd + ": " + message;
+      }
       setState((s) => addLog(s, message, status));
     },
     [],
