@@ -91,11 +91,11 @@ export async function execute(
   state: TerminalState,
   handler: TerminalHandler,
 ): Promise<TerminalState> {
-  const command = state.current.trim(); // trim the input for a raw command
+  const command = state.current.trim();
 
-  if (!command) return state; // if theres nothing, repeat the input again
+  if (!command) return state;
 
-  const output = await handler(command); // wait for the handler to finish
+  const output = await handler(command);
 
   return {
     ...state,

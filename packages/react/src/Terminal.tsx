@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { TerminalEntry, TerminalState } from "termite-core";
+import { TerminalEntry, TerminalState } from "./core";
 import { injectStyles } from "./styles";
 
 /**
