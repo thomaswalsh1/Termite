@@ -5,8 +5,8 @@ import {
   execute,
   clearHistory,
   setCwd,
-} from "termite-core";
-import type { TerminalState, CreateTerminalOptions } from "termite-core";
+} from "../core";
+import type { TerminalState, CreateTerminalOptions } from "../core";
 
 /* clear is necessary for all terminals. It is the only thing that can delete outputs */
 /*

@@ -1,7 +1,6 @@
 {
   "name": "termite-react",
-  "version": "0.0.1",
-  "private": true,
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,13 +10,12 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "files": ["dist"],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch"
   },
-  "dependencies": {
-    "termite-core": "workspace:*"
-  },
+  "prepublishOnly": "tsup",
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
