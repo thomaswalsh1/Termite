@@ -3,7 +3,7 @@
  * Should NEVER be directly edited by the user
  */
 const css = `
-.termite-root {
+:where(.termite-root) {
   --termite-bg:         #000000;
   --termite-text:       #ffffff;
   --termite-font:       ui-monospace, 'Cascadia Code', 'Fira Code', Consolas, monospace;
@@ -19,49 +19,46 @@ const css = `
   overflow:       hidden;
 }
 
-
-.termite-body {
+:where(.termite-body) {
   flex:       1;
   overflow-y: auto;
   min-height: 0;
   padding:    8px 12px;
 }
 
-.termite-history {
+:where(.termite-history) {
   display:        flex;
   flex-direction: column;
 }
 
-.termite-entry,
-.termite-command,
-.termite-output {
+:where(.termite-entry, .termite-command, .termite-output) {
   margin: 0;
 }
 
-.termite-command {
+:where(.termite-command) {
   display:     flex;
   align-items: baseline;
   gap:         1ch;
 }
 
-.termite-output {
+:where(.termite-output) {
   white-space: pre-wrap;
 }
 
-.termite-form {
+:where(.termite-form) {
   display:     flex;
   align-items: center;
   gap:         1ch;
 }
 
-.termite-input-wrapper {
+:where(.termite-input-wrapper) {
   flex:        1;
   position:    relative;
   display:     flex;
   align-items: center;
 }
 
-.termite-input-display {
+:where(.termite-input-display) {
   position:       absolute;
   inset:          0;
   display:        flex;
@@ -73,7 +70,7 @@ const css = `
   white-space:    pre;
 }
 
-.termite-cursor {
+:where(.termite-cursor) {
   background: var(--termite-text);
   color:      var(--termite-bg);
   animation:  termite-blink 1s step-end infinite;
@@ -83,7 +80,7 @@ const css = `
   50% { opacity: 0; }
 }
 
-.termite-input {
+:where(.termite-input) {
   flex:        1;
   width:       100%;
   background:  none;
@@ -97,7 +94,7 @@ const css = `
   padding:     0;
 }
 
-.termite-input::selection {
+:where(.termite-input)::selection {
   background: transparent;
 }
 `;
