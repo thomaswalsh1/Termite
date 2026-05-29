@@ -30,6 +30,14 @@ export default function App() {
   const t4 = useEchoTerminal({ prompt: ">" });
   const t5 = useEchoTerminal({ cwd: "~/projects", prompt: "❯" });
 
+  const myAscii = `
+   _____                    _ _       
+/__   \\___ _ __ _ __ ___ (_) |_ ___ 
+  / /\\/ _ \\ '__| '_ ' _ \\| | __/ _ \\
+ / / |  __/ |  | | | | | | | ||  __/
+ \\/   \\___|_|  |_| |_| |_|_|\\__\\___|
+  `;
+
   const t6 = useLogger({ cwd: "Output@Termite.ui" });
 
   return (
@@ -85,7 +93,7 @@ export default function App() {
             </button>
             <button
             onClick={() => {
-              t6.log(":)", "info")
+              t6.log("\n" + myAscii, "info")
             }}
             >
               Log some art
