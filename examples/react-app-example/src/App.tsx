@@ -1,5 +1,5 @@
 import React from "react";
-import { Terminal, useTerminal } from "termite-react";
+import { Terminal, useLogger, useTerminal } from "termite-react";
 import { FaRegWindowMinimize } from "react-icons/fa";
 import { FaRegWindowClose } from "react-icons/fa";
 import { FaRegWindowMaximize } from "react-icons/fa";
@@ -48,6 +48,8 @@ export default function App() {
   const t3 = useEchoTerminal({ prompt: "root@host:~#" });
   const t4 = useEchoTerminal({ prompt: ">" });
   const t5 = useEchoTerminal({ cwd: "~/projects", prompt: "❯" });
+
+  const t6 = useLogger({ cwd: "Output@Termite.ui:" });
 
   return (
     <div className="app">
@@ -125,6 +127,58 @@ export default function App() {
               state={t5.state}
               onInput={t5.onInput}
               onSubmit={t5.onSubmit}
+            />
+          </div>
+        </section>
+        <section className="demo-section">
+          <h2>Output-only terminals</h2>
+          <div className="custom-terminal-2-buttons">
+            <button
+              onClick={() => {
+                t6.log("Hi!", "info");
+              }}
+            >
+              Say Hi
+            </button>
+            <button
+            onClick={() => {
+              t6.log("This is an example of an error.", "error")
+            }}>
+              Log an Error
+            </button>
+            <button
+            onClick={() => {
+              t6.log("This is an example of a warning.", "warning")
+            }}
+            >
+              Log a Warning
+            </button>
+            <button
+            onClick={() => {
+              t6.log(":)", "info")
+            }}
+            >
+              Log some art
+            </button>
+            <button
+            onClick={() => {
+              t6.clear();
+            }}
+            >
+              Clear
+            </button>
+          </div>
+          <div className="custom-terminal-2-container">
+            <div className="custom-terminal-2-header">
+              <span>Perfect for displaying logs</span>
+              <div className="custom-terminal-2-controls">
+                <FaRegWindowClose className="custom-terminal-2-icon" />
+              </div>
+            </div>
+            <Terminal
+              className="custom-terminal-2"
+              state={t6.state}
+              onInput={() => {}}
             />
           </div>
         </section>
