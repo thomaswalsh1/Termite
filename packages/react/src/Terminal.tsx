@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { TerminalEntry, TerminalState } from "termite-core";
 import { injectStyles } from "./styles";
 
+/**
+ * Covers the user-injectable classnames
+ */
 export interface TerminalClassNames {
   entry?: string;
   command?: string;
@@ -18,6 +21,12 @@ interface TerminalProps {
   classNames?: TerminalClassNames;
 }
 
+/**
+ * Simple overriding function for classes
+ * @param base base class
+ * @param override optional override
+ * @returns the base class if not override
+ */
 const cx = (base: string, override?: string) =>
   override ? `${base} ${override}` : base;
 

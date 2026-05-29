@@ -1,3 +1,7 @@
+/**
+ * Default base styles for termite. 
+ * Should NEVER be directly edited by the user
+ */
 const css = `
 .termite-root {
   --termite-bg:         #000000;
